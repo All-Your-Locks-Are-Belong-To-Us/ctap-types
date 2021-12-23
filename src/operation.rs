@@ -1,7 +1,7 @@
 use core::convert::TryFrom;
 
 /// the authenticator API, consisting of "operations"
-#[derive(Copy,Clone,Debug, Eq,PartialEq)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub enum Operation {
     MakeCredential,
     GetAssertion,
@@ -50,7 +50,7 @@ impl Operation {
 }
 
 /// Vendor CTAP2 operations, from 0x40 to 0x7f.
-#[derive(Copy,Clone,Debug, Eq,PartialEq)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct VendorOperation(u8);
 
 impl VendorOperation {
@@ -95,10 +95,10 @@ impl TryFrom<u8> for Operation {
             0x0D => Config,
             0x40 => PreviewBioEnrollment,
             0x41 => PreviewCredentialManagement,
-            code @ VendorOperation::FIRST..=VendorOperation::LAST
-                 => Vendor(VendorOperation::try_from(code)?),
+            code @ VendorOperation::FIRST..=VendorOperation::LAST => {
+                Vendor(VendorOperation::try_from(code)?)
+            }
             _ => return Err(()),
         })
     }
 }
-

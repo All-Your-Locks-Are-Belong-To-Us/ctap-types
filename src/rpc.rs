@@ -7,4 +7,3 @@ use crate::authenticator::{Error, Request, Response};
 interchange::interchange! {
     CtapInterchange: (Request, Result<Response, Error>)
 }
-
